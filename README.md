@@ -1,151 +1,82 @@
-🔍 Overview
-MubbleZX is a multi‑version, defensive network diagnostics tool designed for authorized environments such as home networks, labs, and enterprise networks where the operator has explicit permission to perform scanning.
+# mubbleZX
 
-It provides:
+nmap-based network scanning framework.
 
-Host discovery
+**Interface labeling:** wired ethernet shows as `wlan`, normal Wi-Fi shows as `wifi`.
 
-Port scanning
+## Features
 
-OS fingerprinting
+- Host discovery via nmap ping sweep
+- Port scanning (common ports or custom ranges)
+- Service version detection (`-sV`)
+- OS fingerprinting (`-O`)
+- Automatic device classification (router, server, workstation, printer, mobile, IoT)
+- Risk assessment per device
+- Interface auto-detection with wlan/wifi labeling
+- Export to JSON, CSV, and HTML reports
 
-Device classification
+## Installation
 
-JSON‑structured reporting
-
-Versioned improvements across releases
-
-MubbleZX is strictly an ethical, legal, and compliance‑aligned tool.
-
-🛡️ Legal & Ethical Notice
-Each item begins with a Guided Link.
-
-Authorized use only — You may only scan networks you own or have explicit written permission to test.
-
-International cybercrime compliance — MubbleZX follows global laws including the Budapest Convention, EU Directive 2013/40/EU, CFAA, CMA, and Romanian Penal Code Art. 360–364.
-
-Ethical hacking standards — ISO/IEC 27001 and CEH principles apply.
-
-Unauthorized access, interception, or interference is illegal worldwide.
-
-🚀 Features
-Each item begins with a Guided Link.
-
-Host discovery
-
-Port scanning
-
-OS fingerprinting
-
-MAC vendor lookup
-
-Device classification
-
-JSON reporting
-
-🧩 Version History
-V1 — Basic Discovery
-Ping sweep
-
-IP detection
-
-V2 — Nmap Integration
-Port scanning
-
-OS detection
-
-MAC vendor parsing
-
-JSON output
-
-V3 — Device Intelligence
-Device type guessing
-
-Port‑based classification
-
-V4 — Structured Reporting
-Timestamped logs
-
-Multi‑device JSON reports
-
-V5 — Claude Edition
-Enhanced parsing
-
-Cleaner summaries
-
-Cross‑model collaboration
-
-📦 Installation
-See INSTALL.md for full instructions.
-
-Basic setup:
-
-bash
-git clone https://github.com/yourusername/MubbleZX.git
-cd MubbleZX
-pip install -r requirements.txt
-Install Nmap:
-
-bash
+```bash
 sudo apt install nmap
-▶️ Usage
-Run a basic authorized scan:
+git clone https://github.com/leafydevx/mubbleZX.git
+cd mubbleZX
+```
 
-bash
-python mubblezx.py
-Scan a specific subnet:
+## Usage
 
-bash
-python mubblezx.py --target 192.168.0.0/24
-Export JSON:
+```bash
+# List network interfaces (wired = wlan, Wi-Fi = wifi)
+python -m mubblezx interfaces
 
-bash
-python mubblezx.py --json report.json
-Each item begins with a Guided Link:
+# Scan the default network
+python -m mubblezx scan
 
-Authorized scanning rules
+# Scan a specific network with deep (service + OS) detection
+python -m mubblezx scan 192.168.1.0/24 --deep
 
-Network basics
+# Scan and export reports
+python -m mubblezx scan --json --csv --html
 
-🔒 Security
-See SECURITY.md for full policy.
+# Scan without sudo
+python -m mubblezx scan --no-sudo
+```
 
-Key points:
+## Framework Structure
 
-No unauthorized access
+```
+mubblezx/
+  __init__.py       # version
+  __main__.py       # python -m entry point
+  cli.py            # CLI argument parsing and output
+  interfaces.py     # network interface detection (wlan/wifi labeling)
+  scanner.py        # core nmap scanner engine
+  reports.py        # JSON, CSV, HTML report generators
+```
 
-No exploitation
+## Interface Labeling
 
-No disruption
+| Connection Type | mubbleZX Label | Example |
+|----------------|----------------|---------|
+| Wired (ethernet) | `wlan0`, `wlan1` | eth0 -> wlan0 |
+| Wi-Fi (wireless) | `wifi0`, `wifi1` | wlan0 -> wifi0 |
 
-No harmful interference
+## Legal & Ethical Notice
 
-Follow responsible disclosure
+Authorized use only. You may only scan networks you own or have explicit written permission to test.
 
-🤝 Contributing
-See CONTRIBUTING.md.
+MubbleZX follows global cybercrime laws including the Budapest Convention, EU Directive 2013/40/EU, CFAA, and CMA.
 
-Contributions must:
-
-Follow legal and ethical rules
-
-Avoid offensive features
-
-Include documentation updates
-
-Use clean, readable code
-
-📜 License
-See LICENSE.
-
-MubbleZX is licensed for authorized, ethical, defensive use only.
-
-⭐ Additional Documentation
-INSTALL.md
-
-SECURITY.md
-
-CONTRIBUTING.md
-
-LICENSE
 THE OWNER/DEVELOPER IS NOT RESPONSIBLE FOR ANY MISUSE OR HARMFUL ACTS OF THIS SOFTWARE.
+
+## Legacy Versions
+
+Previous single-file versions are preserved in the repository root:
+- `mubbleZX.py` - v4 radar GUI
+- `mubbleZXv2.py` - v2 CLI scanner
+- `mubbleZXv5.py` - v5 radar + JSON
+- `mubbleZXv12_Enterprise.py` - v12 enterprise GUI
+
+## License
+
+See LICENSE. Licensed for authorized, ethical, defensive use only.
