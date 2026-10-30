@@ -81,26 +81,27 @@ See INSTALL.md for full instructions.
 Basic setup:
 
 bash
-git clone https://github.com/yourusername/MubbleZX.git
-cd MubbleZX
-pip install -r requirements.txt
-Install Nmap:
+git clone https://github.com/leafydevx/mubbleZX.git
+cd mubbleZX
+
+Install Nmap (the tools call the nmap command):
 
 bash
 sudo apt install nmap
+
+Python 3 is required. The scripts import only standard-library modules, plus tkinter for the GUI versions (v4, v5, and v12). Install tkinter with your system package manager if it is missing (for example `sudo apt install python3-tk`).
+
 ▶️ Usage
-Run a basic authorized scan:
+Each version is a separate script. Run the one you want directly with Python:
 
 bash
-python mubblezx.py
-Scan a specific subnet:
+python3 mubbleZX.py          # v4: radar-style GUI, port scan
+python3 mubbleZXv2.py        # v2: text output, nmap-based scan
+python3 mubbleZXv5.py        # v5: radar-style GUI (hold SPACE to scan)
+python3 mubbleZXv12_Enterprise.py   # v12: GUI, results stored in SQLite
 
-bash
-python mubblezx.py --target 192.168.0.0/24
-Export JSON:
+Scan settings are not command-line options yet. The v2 script reads its target and options from a CONFIG block at the top of the file (for example NETWORK_RANGE, ENABLE_OS_DETECTION, and OUTPUT_JSON_FILE). The default target in the GUI versions is 192.168.1.0/24. Change it in the source before scanning a different network.
 
-bash
-python mubblezx.py --json report.json
 Each item begins with a Guided Link:
 
 Authorized scanning rules
